@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -29,14 +30,14 @@ public class LoginController {
     MiaoshaUserService userService;
 
     @RequestMapping("/to_login")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<Boolean> doLogin(@Valid LoginVo loginVo){
+    public Result<Boolean> doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
         log.info(loginVo.toString() + "ZZZZ");
         //参数校验
         /*String inputPass =  loginVo.getPassword();
@@ -59,7 +60,7 @@ public class LoginController {
         else{
             return Result.error(cm);
         }*/
-        userService.login(loginVo);
+        userService.login(response, loginVo);
         return Result.success(true);
     }
 }
