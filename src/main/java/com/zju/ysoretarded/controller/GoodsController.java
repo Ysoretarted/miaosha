@@ -68,7 +68,7 @@ public class GoodsController {
         model.addAttribute("user", user);
 
         GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
-        model.addAttribute("goods",goods);
+
 
         long startAt = goods.getStartDate().getTime();
         long endAt = goods.getEndDate().getTime();
@@ -86,8 +86,9 @@ public class GoodsController {
             remainSeconds = -1;
         }else{
             miaoshaStatus = 1;
-            miaoshaStatus = 0;
+            remainSeconds = 0;
         }
+        model.addAttribute("goods",goods);
         model.addAttribute("miaoshaStatus",miaoshaStatus);
         model.addAttribute("remainSeconds",remainSeconds);
         return "goods_detail";
